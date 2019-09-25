@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
@@ -11,7 +12,7 @@ app = Flask(__name__)
 api = Api(app)
 app.secret_key = 'satish_key'
 jwt = JWT(app,authenticate,identity) #creates an end point "/auth"
-app.config['SQLALCHEMY_DATABASE_URI']= 'sqlite:///test.db'
+app.config['SQLALCHEMY_DATABASE_URI']= os.environ.get('DATABASE_URL','sqlite:///test.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']= False
 
 
